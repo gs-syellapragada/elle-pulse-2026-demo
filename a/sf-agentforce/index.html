@@ -395,8 +395,9 @@ body{font-family:-apple-system,'SF Pro Text','Helvetica Neue',Arial,sans-serif;f
 </head>
 <body>
 <style>
-html,body{margin:0;padding:0;min-height:100%;background:transparent!important;}
-#__bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+html,body{margin:0;padding:0;min-height:100%;background:#b6c4de!important;}
+/* The Pulse starfield sat behind the page; the real Salesforce page background (#b6c4de) shows instead. */
+#__bg{display:none;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
 #root{position:relative;z-index:1;}
 @keyframes starPulse1{0%,100%{opacity:0.18}
 @keyframes starPulse2{0%,100%{opacity:0.28}
@@ -1637,6 +1638,23 @@ html,body{margin:0;padding:0;min-height:100%;background:transparent!important;}
         setTimeout(function() { afInput.focus(); }, 350);
       }
     }
+
+    /* ── Deck control: Enter / Right arrow open the panel, type and send each prompt, and confirm the opportunity ── */
+    window.__elleState = function() {
+      var open = afPanel.classList.contains('af-open');
+      if (!open) return 'ready';
+      var confirmBtn = document.getElementById('af-confirm-opp-btn');
+      if (confirmBtn && !confirmBtn.disabled) return 'ready';
+      if (scriptStep >= 2 && !afInput.disabled) return 'done';
+      return afInput.disabled ? 'busy' : 'ready';
+    };
+    window.addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter' || e.shiftKey || e.target === afInput) return;
+      if (!afPanel.classList.contains('af-open')) { toggleAF(); return; }
+      var confirmBtn = document.getElementById('af-confirm-opp-btn');
+      if (confirmBtn && !confirmBtn.disabled) { confirmBtn.click(); return; }
+      if (!afInput.disabled) { afInput.focus(); handleSend(); }
+    });
 
     afIcon.addEventListener('click', toggleAF);
     afClose.addEventListener('click', toggleAF);

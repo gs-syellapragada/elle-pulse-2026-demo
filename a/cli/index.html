@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Code — Terminal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"></noscript>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -132,6 +132,7 @@ body {
 .s-model { font-size: 16px; color: #777; margin: 4px 0; }
 .s-div   { height: 1px; background: #2e2e2e; margin: 10px 0; }
 .s-prompt-row { display: flex; align-items: flex-start; padding: 6px 0; }
+.s-prompt-row .cur { margin-top: 6.5px; }
 .s-shorts { font-size: 15px; color: #555; padding: 4px 0; }
 
 /* ── Bash block ── */
@@ -254,7 +255,7 @@ body {
 
 <!-- Programs screen overlay -->
 <div id="figma-overlay">
-  <iframe src="programs.html" id="programs-frame" title="Programs"></iframe>
+  <iframe data-src="programs.html" id="programs-frame" title="Programs"></iframe>
   <div class="figma-kbd-hint">⎋ ESC — close &nbsp;·&nbsp; ↵ Enter — continue</div>
 </div>
 </div>
@@ -877,6 +878,8 @@ const AI_BUILDER_B64 = (function() {
 
 function showFigmaOverlay() {
   const ov = document.getElementById('figma-overlay');
+  const pf = document.getElementById('programs-frame');
+  if (!pf.getAttribute('src')) pf.setAttribute('src', pf.dataset.src);
   ov.classList.remove('hiding');
   ov.classList.add('visible');
   overlayVisible = true;
