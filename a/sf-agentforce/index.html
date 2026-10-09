@@ -1541,14 +1541,14 @@ html,body{margin:0;padding:0;min-height:100%;background:#b6c4de!important;}
           agentTypedMsg(
             'Huntington Industries is ready to expand, and one of the signals is easy to miss. I looked across Staircase, Gainsight CS, and Skilljar. A new business unit that has never bought from Elle is asking about a capability you sell, and the pilot team is already certified.',
             '<div class="af-card"><div class="af-card-hdr"><span class="af-card-name">Expansion signals</span></div><div class="af-card-fields">'
-              + signal('Staircase', 'Support email from a new business unit', 'Litigation Support wrote to Elle\'s support team: &ldquo;Can Elle handle discovery documents too?&rdquo; This team has never bought anything from Elle.', true)
+              + signal('Staircase', 'Support email from a new business unit', 'Amir Miller, from the new EMEA business unit, wrote to Elle Support: &ldquo;Can Elle handle discovery documents too?&rdquo; This team has never bought anything from Elle.', true)
               + '<div class="af-card-divider"></div>'
               + signal('Skilljar', 'Training activity', '18 lawyers from the pilot are certified on Elle Assistant. Three users from the international legal teams started the Elle Counsel course on their own.')
               + '<div class="af-card-divider"></div>'
               + signal('Gainsight CS', 'CSM note from Emmett Forrest', 'The new champion wants to roll Elle out to the international legal teams once the pilot is done.')
               + '</div></div>'
               + '<div class="af-rec-wrap"><div class="af-rec-label">Recommendations</div>'
-              + '<div class="af-rec-item">' + ARROW + '<span class="af-rec-text">Draft outreach to the new business unit</span></div>'
+              + '<div class="af-rec-item">' + ARROW + '<span class="af-rec-text">Draft outreach to Amir Miller</span></div>'
               + '<div class="af-rec-item">' + ARROW + '<span class="af-rec-text">Open an opportunity for Elle Discovery</span></div>'
               + '<div class="af-rec-item">' + ARROW + '<span class="af-rec-text">Add the international legal teams to the account plan</span></div></div>',
             true,
@@ -1561,14 +1561,14 @@ html,body{margin:0;padding:0;min-height:100%;background:#b6c4de!important;}
         setTimeout(function() {
           afMessages.removeChild(ind2);
           agentTypedMsg(
-            'Here is the outreach I drafted for the Litigation Support team, and the opportunity I will open. Review both before I create anything.',
+            'Here is the outreach I drafted for Amir Miller, and the opportunity I will open. Review both before I create anything.',
             '<div class="af-card"><div class="af-card-hdr"><span class="af-card-name">Draft outreach</span></div><div class="af-card-fields">'
-              + '<div class="af-cfield"><span class="af-cfield-lbl">To</span><span class="af-cfield-val">Huntington Litigation Support</span></div>'
-              + '<div class="af-cfield"><span class="af-cfield-lbl">Subject</span><span class="af-cfield-val">Elle for discovery documents at Huntington</span></div>'
-              + '<div class="af-cfield"><span class="af-cfield-lbl">Message</span><span class="af-cfield-val">Hi team, I saw your question to our support team about discovery documents. Your colleagues in legal are already using Elle, and 18 of them are certified. I would love to show you what Elle can do for discovery. Do you have 30 minutes this week?<br><br>Cindy</span></div>'
+              + '<div class="af-cfield"><span class="af-cfield-lbl">To</span><span class="af-cfield-val">Amir Miller, Huntington Industries (EMEA)</span></div>'
+              + '<div class="af-cfield"><span class="af-cfield-lbl">Subject</span><span class="af-cfield-val">Elle Counsel for discovery documents</span></div>'
+              + '<div class="af-cfield"><span class="af-cfield-lbl">Message</span><span class="af-cfield-val">Hi Amir, I saw your question to our support team about discovery documents. Your colleagues in legal are already using Elle, and 18 of them are certified. I would love to show you what Elle Counsel can do for discovery. Do you have 30 minutes this week?<br><br>Cindy</span></div>'
               + '</div></div>'
               + '<div class="af-kv-fields"><div class="af-kv-field"><span class="af-kv-lbl">accountName</span><span class="af-kv-val">Huntington Industries</span></div>'
-              + '<div class="af-kv-field"><span class="af-kv-lbl">opportunityName</span><span class="af-kv-val">Elle Discovery: Litigation Support</span></div>'
+              + '<div class="af-kv-field"><span class="af-kv-lbl">opportunityName</span><span class="af-kv-val">Elle Discovery: EMEA business unit</span></div>'
               + '<div class="af-kv-field"><span class="af-kv-lbl">stage</span><span class="af-kv-val">Qualification</span></div>'
               + '<div class="af-kv-field"><span class="af-kv-lbl">closeDate</span><span class="af-kv-val">' + fmtDate(60) + '</span></div></div>'
               + '<div class="af-cc-box"><button class="af-cc-btn" id="af-confirm-opp-btn">Confirm</button><div class="af-cc-divider"></div><button class="af-cc-btn" id="af-cancel-opp-btn">Cancel</button></div>',
@@ -1584,8 +1584,8 @@ html,body{margin:0;padding:0;min-height:100%;background:#b6c4de!important;}
                   setTimeout(function() {
                     afMessages.removeChild(ind3);
                     agentTypedMsg(
-                      'Done. The opportunity &ldquo;Elle Discovery: Litigation Support&rdquo; is open at the Qualification stage with a close date 60 days out, and the outreach is in your drafts. Gainsight will keep adding signals to it as the team engages.',
-                      '<div class="af-card"><div class="af-card-hdr"><span class="af-card-name">Opportunity created</span></div><div class="af-card-fields"><div class="af-cfield"><span class="af-cfield-lbl">Name</span><span class="af-cfield-link">Elle Discovery: Litigation Support</span></div><div class="af-cfield"><span class="af-cfield-lbl">Stage</span><span class="af-cfield-val">Qualification</span></div><div class="af-cfield"><span class="af-cfield-lbl">Close Date</span><span class="af-cfield-val">' + fmtDate(60) + '</span></div></div></div>',
+                      'Done. The opportunity &ldquo;Elle Discovery: EMEA business unit&rdquo; is open at the Qualification stage with a close date 60 days out, and the outreach is in your drafts. Gainsight will keep adding signals to it as the team engages.',
+                      '<div class="af-card"><div class="af-card-hdr"><span class="af-card-name">Opportunity created</span></div><div class="af-card-fields"><div class="af-cfield"><span class="af-cfield-lbl">Name</span><span class="af-cfield-link">Elle Discovery: EMEA business unit</span></div><div class="af-cfield"><span class="af-cfield-lbl">Stage</span><span class="af-cfield-val">Qualification</span></div><div class="af-cfield"><span class="af-cfield-lbl">Close Date</span><span class="af-cfield-val">' + fmtDate(60) + '</span></div></div></div>',
                       true,
                       function() { scriptStep = 2; afInput.disabled = false; afSend.disabled = false; afInput.value = ''; }
                     );
