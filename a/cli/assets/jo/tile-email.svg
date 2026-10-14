@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Container">
+<path id="Rectangle Copy" d="M12 0.5H44C50.3513 0.500001 55.5 5.64873 55.5 12V44C55.5 50.3513 50.3513 55.5 44 55.5H12C5.64873 55.5 0.5 50.3513 0.5 44V12C0.500001 5.64873 5.64873 0.5 12 0.5Z" fill="#EBECFA" stroke="#A5ABE4"/>
+<g id="Icon Group">
+<path id="Rectangle" d="M18 18.7002H38C39.2703 18.7002 40.2998 19.7297 40.2998 21V35C40.2998 36.2703 39.2703 37.2998 38 37.2998H18C16.7297 37.2998 15.7002 36.2703 15.7002 35V21C15.7002 19.7297 16.7297 18.7002 18 18.7002Z" fill="white" stroke="#4E5BCA" stroke-width="1.4"/>
+<path id="Rectangle_2" d="M18 18.7002H38C39.2703 18.7002 40.2998 19.7297 40.2998 21V22.4033C40.2997 22.5134 40.2395 22.6147 40.1426 22.667L28.0127 29.2051L15.8574 22.667C15.7603 22.6147 15.7002 22.5127 15.7002 22.4023V21C15.7002 19.7297 16.7297 18.7002 18 18.7002Z" fill="#A5ABE4" stroke="#4E5BCA" stroke-width="1.4"/>
+</g>
+</g>
+</svg>

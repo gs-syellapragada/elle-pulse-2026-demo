@@ -1014,7 +1014,11 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
 // Init
 // ─────────────────────────────────────────────
 // Fill a big screen: scale the window up when the viewport is larger than the 1032px design
-function fitWindow() { document.querySelector('.window').style.zoom = Math.max(1, Math.min(innerWidth / 1150, innerHeight / 800)); }
+function fitWindow() {
+  const w = document.querySelector('.window');
+  const z = Math.max(1, Math.min(innerWidth * 0.96 / 1032, innerHeight * 0.94 / 735));
+  w.style.maxWidth = 'none'; w.style.zoom = z; // the window is 1032px wide by design, so scale from that, not from vw
+}
 fitWindow(); addEventListener('resize', fitWindow);
 showStartup();
 </script>

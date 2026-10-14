@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56.0002" height="56.0001" viewBox="0 0 56.0002 56.0001" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Container">
+<path id="Rectangle Copy" fill-rule="evenodd" clip-rule="evenodd" d="M0 12.0001C0 5.37269 5.37258 0.000104488 12 0.000104488H44C50.6274 0.000104488 56 5.37269 56 12.0001V44.0001C56 50.6275 50.6274 56.0001 44 56.0001H12C5.37258 56.0001 0 50.6275 0 44.0001L0 12.0001Z" fill="#FFF3D1"/>
+<g id="Icon Group">
+<path id="Vector 1409" d="M26.5856 17.4142L17.4141 26.5858C16.633 27.3668 16.633 28.6331 17.4141 29.4142L26.5856 38.5858C27.3667 39.3668 28.633 39.3668 29.4141 38.5858L38.5856 29.4142C39.3667 28.6331 39.3667 27.3668 38.5856 26.5858L29.4141 17.4142C28.633 16.6331 27.3667 16.6331 26.5856 17.4142Z" fill="white" stroke="#DF8404" stroke-width="1.4"/>
+<circle id="Ellipse 121" cx="22.9998" cy="28" r="1.5" fill="white" stroke="#DF8404"/>
+<circle id="Ellipse 122" cx="27.9998" cy="28" r="1.5" fill="white" stroke="#DF8404"/>
+<circle id="Ellipse 123" cx="32.9998" cy="28" r="1.5" fill="white" stroke="#DF8404"/>
+</g>
+</g>
+</svg>

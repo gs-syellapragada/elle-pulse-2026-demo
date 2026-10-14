@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Container">
+<path id="Rectangle Copy" fill-rule="evenodd" clip-rule="evenodd" d="M0 12C0 5.37258 5.37258 0 12 0H44C50.6274 0 56 5.37258 56 12V44C56 50.6274 50.6274 56 44 56H12C5.37258 56 0 50.6274 0 44L0 12Z" fill="#FFF3D1"/>
+<g id="Icon Group">
+<path id="Path" d="M30.5 15.5V17.5H29.5V19.6104L29.9004 19.6914C31.1389 19.9438 32.291 20.4382 33.3047 21.123L33.6465 21.3535L35.5 19.5L37.5 21.5L35.9375 23.0615L35.6465 23.3535L35.877 23.6953C36.9012 25.2113 37.5 27.0365 37.5 29C37.5 34.238 33.238 38.5 28 38.5C22.762 38.5 18.5 34.238 18.5 29C18.5 27.0365 19.0988 25.2113 20.123 23.6953L20.3535 23.3535L20.0625 23.0615L18.5 21.5L20.5 19.5L22.3535 21.3535L22.6953 21.123C23.709 20.4382 24.8611 19.9438 26.0996 19.6914L26.5 19.6104V17.5H25.5V15.5H30.5Z" fill="white" stroke="#DF8404"/>
+<circle id="Oval" cx="28" cy="29" r="9.3" fill="white" stroke="#DF8404" stroke-width="1.4"/>
+<path id="Vector 2" d="M28 23.4385V30.3882L32.7297 32.4513" stroke="#F4A702" stroke-width="1.4" stroke-linecap="round"/>
+</g>
+</g>
+</svg>

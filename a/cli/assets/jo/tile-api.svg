@@ -1,0 +1,25 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Container">
+<path id="Rectangle Copy" fill-rule="evenodd" clip-rule="evenodd" d="M0 12C0 5.37258 5.37258 0 12 0H44C50.6274 0 56 5.37258 56 12V44C56 50.6274 50.6274 56 44 56H12C5.37258 56 0 50.6274 0 44L0 12Z" fill="#F3F4FC"/>
+<path id="Path" d="M36 40C37.6569 40 39 38.6569 39 37V32.2426C39 31.447 39.3161 30.6839 39.8787 30.1213L42 28L39.8787 25.8787C39.3161 25.3161 39 24.553 39 23.7574V19C39 17.3431 37.6569 16 36 16" stroke="#4E5BCA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_2" d="M20 40C18.3431 40 17 38.6569 17 37V32.2426C17 31.447 16.6839 30.6839 16.1213 30.1213L14 28L16.1213 25.8787C16.6839 25.3161 17 24.553 17 23.7574V19C17 17.3431 18.3431 16 20 16" stroke="#4E5BCA" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Rectangle">
+<mask id="path-4-inside-1_0_313" fill="white">
+<rect x="23" y="21" width="10" height="4" rx="1"/>
+</mask>
+<rect x="23" y="21" width="10" height="4" rx="1" fill="white" stroke="#4E5BCA" stroke-width="2.8" mask="url(#path-4-inside-1_0_313)"/>
+</g>
+<g id="Rectangle_2">
+<mask id="path-5-inside-2_0_313" fill="white">
+<rect x="23" y="26" width="7" height="4" rx="1"/>
+</mask>
+<rect x="23" y="26" width="7" height="4" rx="1" fill="white" stroke="#4E5BCA" stroke-width="2.8" mask="url(#path-5-inside-2_0_313)"/>
+</g>
+<g id="Rectangle_3">
+<mask id="path-6-inside-3_0_313" fill="white">
+<rect x="23" y="31" width="4" height="4" rx="1"/>
+</mask>
+<rect x="23" y="31" width="4" height="4" rx="1" fill="white" stroke="#4E5BCA" stroke-width="2.8" mask="url(#path-6-inside-3_0_313)"/>
+</g>
+</g>
+</svg>
