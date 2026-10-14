@@ -420,6 +420,7 @@ function sp1() { enq(done => { app(el('div','sp1')); done(); }); }
 // ─────────────────────────────────────────────
 // Typing (cancellable via gen)
 // ─────────────────────────────────────────────
+const TYPE_MS = 30; // one steady typing speed for every prompt (about 33 characters a second, readable on a big screen)
 function typeInto(node, text, myGen, spd) {
   return new Promise(res => {
     const base = node.innerHTML; let i = 0;
@@ -428,7 +429,7 @@ function typeInto(node, text, myGen, spd) {
       if (i > text.length) { res(); return; }
       node.innerHTML = base + escHtml(text.slice(0,i)) + '<span class="cur cur-g"></span>';
       scroll(); i++;
-      setTimeout(step, (spd||38) + Math.random()*16);
+      setTimeout(step, spd || TYPE_MS);
     }
     step();
   });
@@ -749,7 +750,7 @@ function waitFor(state, hint) {
 function startAdmin1() {
   demoState = 'admin-run';
   dropFooter(3); // divider, shortcuts, and the startup prompt row (a flex row, so a typed hanging indent and the cursor would split apart)
-  typePrompt(ADMIN_PROMPT1, 16);
+  typePrompt(ADMIN_PROMPT1);
   wait(450);
   action("Reading your Gainsight instance. I won't change anything.");
   sp1();

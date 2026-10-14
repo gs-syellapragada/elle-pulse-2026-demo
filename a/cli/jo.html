@@ -46,7 +46,7 @@ img{display:block;max-width:none}
 .back .row{display:flex;align-items:center;gap:8px}
 .lbl{background:#F6F6F6;border:1px solid rgba(24,31,38,.08);border-radius:6px;padding:1px 6px 3px;font-size:12px;line-height:16px;transition:all .4s}
 .lbl.live{background:#D5F5DB;border-color:#a8e6bb;color:#0b7a4a;font-weight:600}
-.publish{left:1325px;top:56px;height:32px;padding:4px 16px;border-radius:100px;background:#0369E9;color:#fff;font-size:14px;font-weight:600;line-height:24px;transition:background .3s}
+.publish{right:32px;top:56px;height:32px;padding:4px 16px;border-radius:100px;background:#0369E9;color:#fff;font-size:14px;font-weight:600;line-height:24px;transition:background .3s}
 .publish.busy{background:#6aa6f2}
 .publish.done{background:#D5F5DB;color:#0b7a4a}
 
@@ -223,6 +223,7 @@ function fit() {
 }
 fit(); addEventListener('resize', fit);
 
+var TYPE_MS = 30; // same per-character delay as the terminal prompts
 var AI_TEXT = "When an account turns red within 120 days of renewal, email the executive sponsor, wait three days, then create a follow-up CTA for the CSM.";
 function publish() {
   var b = document.getElementById('publish'), chip = document.getElementById('chip');
@@ -239,7 +240,7 @@ function openAi() {
   document.getElementById('scrim').classList.add('show');
   document.getElementById('ai').classList.add('show');
   var t = document.getElementById('ai-text'), i = 0;
-  (function step() { if (i > AI_TEXT.length) return; t.textContent = AI_TEXT.slice(0, i++); setTimeout(step, 22); })();
+  (function step() { if (i > AI_TEXT.length) return; t.textContent = AI_TEXT.slice(0, i++); setTimeout(step, TYPE_MS); })();
 }
 document.getElementById('publish').addEventListener('click', publish);
 document.getElementById('aib').addEventListener('click', openAi);
