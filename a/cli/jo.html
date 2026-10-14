@@ -217,9 +217,16 @@ img{display:block;max-width:none}
 <script>
 // The terminal page drives this screen: 'publish', then 'ai'. The 1440 x 900 design is scaled to fit and centered.
 var stage = document.getElementById('stage');
+// Fill the window: scale to the width, then stretch the height-dependent parts (left menu, canvas texture, sidebar card) to the real height.
+// Only a very wide, short window falls back to scaling by height with side margins.
 function fit() {
-  var s = Math.min(innerWidth / 1440, innerHeight / 900);
-  stage.style.transform = 'translate(' + ((innerWidth - 1440 * s) / 2) + 'px,' + ((innerHeight - 900 * s) / 2) + 'px) scale(' + s + ')';
+  var s = innerWidth / 1440, h = innerHeight / s, x = 0;
+  if (h < 780) { s = innerHeight / 780; h = 780; x = (innerWidth - 1440 * s) / 2; }
+  stage.style.height = h + 'px';
+  stage.style.transform = 'translate(' + x + 'px,0) scale(' + s + ')';
+  document.querySelector('.lmenu').style.height = h + 'px';
+  document.querySelector('.dots').style.height = (h - 96) + 'px';
+  document.querySelector('.side-bg').style.height = Math.max(610, h - 120) + 'px';
 }
 fit(); addEventListener('resize', fit);
 
