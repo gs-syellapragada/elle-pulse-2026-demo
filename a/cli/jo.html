@@ -4,25 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Journey Orchestrator: Executive outreach</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="./noto-sans.css">
 <style>
-/* Built from the Pulse-2026 Figma frame "CLI JO Output" (1440 x 900), scaled to fit the window */
+/* Built from the Pulse-2026 Figma frame "CLI JO Output". Real pixel sizes, no scaling: the canvas fills the window, the right panel is anchored right. */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;height:100%;overflow:hidden;background:#FDFDFE;font-family:'Noto Sans',sans-serif;color:#181F26}
+html,body{width:100%;height:100%;overflow:hidden;background:#FDFDFE;font-family:'Noto Sans',sans-serif;font-variant-numeric:tabular-nums;color:#181F26}
 button{font:inherit;border:0;background:none;cursor:pointer;color:inherit}
-.stage{position:absolute;left:0;top:0;width:1440px;height:900px;transform-origin:0 0;background:#FDFDFE;overflow:hidden}
-.abs{position:absolute}
 img{display:block;max-width:none}
+.abs{position:absolute}
 .ic{position:relative;width:24px;height:24px;flex:none}
 .ic .in{position:absolute;inset:var(--i,0)}
 .ic img{position:absolute;inset:var(--b,0);width:calc(100% - var(--bw,0px));height:calc(100% - var(--bh,0px))}
 .ic .full{position:absolute;inset:0;width:100%;height:100%}
-
-/* canvas texture */
-.dots{left:48px;top:96px;width:1392px;height:804px;opacity:.3;background:url(assets/jo/canvas-dots.png) 0 0/16px 16px}
+.app{position:absolute;inset:0;display:flex}
 
 /* left menu */
-.lmenu{left:0;top:0;width:48px;height:900px;background:#34383A;display:flex;flex-direction:column;align-items:center}
+.lmenu{width:48px;flex:none;height:100%;background:#34383A;display:flex;flex-direction:column;align-items:center}
 .mi{width:48px;height:48px;flex:none;display:flex;align-items:center;justify-content:center;position:relative}
 .mi.on{background:#43474A}
 .mi.on::before{content:'';position:absolute;left:0;top:0;width:3px;height:48px;background:#0369E9}
@@ -30,105 +27,85 @@ img{display:block;max-width:none}
 .mi .grid4 i{position:absolute;border:1.4px solid #C8C9C9;border-radius:1px}
 .mdiv{width:48px;height:1px;background:#54585A;flex:none}
 
+.main{flex:1;min-width:0;height:100%;position:relative;display:flex;flex-direction:column}
 /* header */
-.hdr{left:48px;top:0;width:1392px;height:96px;background:#fff;box-shadow:0 0 .5px rgba(52,56,58,.24),0 2px 2px rgba(52,56,58,.06)}
-.hdr-top{height:48px;border-bottom:1px solid #E6E9EC;padding:4px 24px 4px 32px;display:flex;align-items:center;justify-content:space-between}
-.hdr-title{width:316px;padding:8px 0;font-size:18px;font-weight:600;line-height:24px}
-.search{width:648px;background:#F5F7F9;border-radius:32px;padding:4px 8px;display:flex;align-items:center;justify-content:center}
+.hdr{height:96px;flex:none;background:#fff;box-shadow:0 0 .5px rgba(52,56,58,.24),0 2px 2px rgba(52,56,58,.06);position:relative;z-index:3}
+.hdr-top{height:48px;border-bottom:1px solid #E6E9EC;padding:4px 24px 4px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hdr-title{width:316px;padding:8px 0;font-size:20px;font-weight:600;line-height:28px;flex:none}
+.search{flex:1;max-width:648px;background:#F5F7F9;border-radius:32px;padding:4px 8px;display:flex;align-items:center;justify-content:center}
 .search .si{width:24px;height:24px;display:grid;place-items:center}
-.search .cur{width:6px}
-.search p{width:596px;font-size:14px;line-height:24px;color:#ACB4BD;display:flex;align-items:flex-end}
-.hicons{width:324px;display:flex;justify-content:flex-end;gap:12px}
+.search p{flex:1;font-size:15px;line-height:24px;color:#ACB4BD;padding-left:6px}
+.hicons{width:316px;flex:none;display:flex;justify-content:flex-end;gap:12px}
 .hbtn{width:40px;height:40px;border-radius:100px;display:grid;place-items:center}
 .hbtn img.av{width:24px;height:24px;border-radius:50%}
-.back{left:72px;top:60px;display:flex;align-items:center;gap:4px}
-.back .t{font-size:14px;font-weight:600;line-height:24px;white-space:nowrap}
+.sub{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 32px 0 24px}
+.back{display:flex;align-items:center;gap:4px}
+.back .t{font-size:15px;font-weight:600;line-height:24px;white-space:nowrap}
 .back .row{display:flex;align-items:center;gap:8px}
-.lbl{background:#F6F6F6;border:1px solid rgba(24,31,38,.08);border-radius:6px;padding:1px 6px 3px;font-size:12px;line-height:16px;transition:all .4s}
+.lbl{background:#F6F6F6;border:1px solid rgba(24,31,38,.08);border-radius:8px;padding:1px 8px 2px;font-size:13px;line-height:20px;transition:all .4s}
 .lbl.live{background:#D5F5DB;border-color:#a8e6bb;color:#0b7a4a;font-weight:600}
-.publish{right:32px;top:56px;height:32px;padding:4px 16px;border-radius:100px;background:#0369E9;color:#fff;font-size:14px;font-weight:600;line-height:24px;transition:background .3s}
+.publish{height:36px;padding:6px 20px;border-radius:100px;background:#0369E9;color:#fff;font-size:15px;font-weight:600;line-height:24px;transition:background .3s}
 .publish.busy{background:#6aa6f2}
 .publish.done{background:#D5F5DB;color:#0b7a4a}
 
-/* AI builder pill */
-.aib{left:80px;top:120px;background:#F5F9FE;border:1px solid #55adff;border-radius:8px;padding:4px 8px 4px 4px;display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;line-height:16px}
+/* canvas */
+.canvas{flex:1;min-height:0;position:relative;overflow:hidden}
+.dots{inset:0;opacity:.3;background:url(assets/jo/canvas-dots.png) 0 0/16px 16px}
+.aib{left:32px;top:24px;background:#F5F9FE;border:1px solid #55adff;border-radius:8px;padding:4px 10px 4px 6px;display:flex;align-items:center;gap:4px;font-size:13px;font-weight:600;line-height:20px}
 .aib.pulse{animation:aibp 1.6s ease-in-out 2}
 @keyframes aibp{50%{box-shadow:0 0 0 6px rgba(3,105,233,.16)}}
 .aib .ai16{position:relative;width:16px;height:16px}
 .aib .ai16 img{position:absolute;left:1.33px;top:1.33px;width:13.333px;height:13.333px}
-
-/* toolbar */
-.tb{left:972px;top:120px;width:209px;height:40px;background:#fff;border-radius:24px;box-shadow:0 0 .5px rgba(52,56,58,.24),0 2px 2px rgba(52,56,58,.06)}
+.tb{right:259px;top:24px;width:209px;height:40px;background:#fff;border-radius:24px;box-shadow:0 0 .5px rgba(52,56,58,.24),0 2px 2px rgba(52,56,58,.06)}
 .tb .t{position:absolute;top:8px;width:24px;height:24px}
 .tb .t img{position:absolute;inset:0;width:24px;height:24px}
 .tb .div{position:absolute;left:136px;top:10px;width:1px;height:20px;background:#E6E9EC}
 
-/* sidebar */
-.side-bg{left:1186px;top:114px;width:233.9px;height:780px}
-.stitle{font-size:14px;font-weight:600;line-height:24px}
-.slbl{width:100px;margin-left:-50px;text-align:center;font-size:12px;line-height:16px;color:#3C4A57;white-space:nowrap}
-.big{width:40px;line-height:40px;text-align:center;font-size:26px;font-weight:600}
+/* right panel */
+.rside{right:32px;top:24px;bottom:24px;width:210px}
+.rside .bg{left:-12px;top:-6px;width:calc(100% + 24px);height:calc(100% + 24px)}
+.stitle{font-size:15px;font-weight:600;line-height:24px}
+.slbl{width:100px;margin-left:-50px;text-align:center;font-size:13px;line-height:20px;color:#3C4A57;white-space:nowrap}
+.big{width:40px;line-height:40px;text-align:center;font-size:20px;font-weight:700}
+.tile{width:56px;height:56px}
 
-/* flow */
+/* flow: centered on the canvas, children positioned from its center line */
+.flow{left:calc(50% - 24px);top:0;width:0;height:100%}
 .vline{width:1px}
-.tlabel{font-size:12px;line-height:16px;color:#3C4A57;text-align:center;white-space:nowrap}
+.tlabel{font-size:13px;line-height:20px;color:#3C4A57;text-align:center;white-space:nowrap}
 .node{position:absolute;display:flex;flex-direction:column;align-items:center;gap:16px;animation:rise .5s ease both}
 .node .grp{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
-.node .nl{background:#fff;border-radius:4px;padding:2px;font-size:12px;line-height:16px;color:#5F6C7A;text-align:center;white-space:nowrap}
-.node .so{background:#F5F7F9;border-radius:6px;padding:4px;font-size:12px;line-height:16px;color:#0369E9;white-space:nowrap}
-.node .sent{background:#F5F7F9;border:1px solid #E6E9EC;border-radius:4px;padding:2px 8px;font-size:12px;line-height:16px;color:#5F6C7A;white-space:nowrap}
+.node .nl{background:#fff;border-radius:4px;padding:2px;font-size:13px;line-height:20px;color:#5F6C7A;text-align:center;white-space:nowrap}
+.node .so{background:#F5F7F9;border-radius:8px;padding:4px 8px;font-size:13px;line-height:20px;color:#0369E9;white-space:nowrap}
+.node .sent{background:#F5F7F9;border:1px solid #E6E9EC;border-radius:8px;padding:2px 8px;font-size:13px;line-height:20px;color:#5F6C7A;white-space:nowrap}
 .node .sent.ok{background:#D5F5DB;border-color:#a8e6bb;color:#0b7a4a}
 @keyframes rise{from{opacity:0}}
 
 /* toast + AI panel */
-.toast{left:50%;top:112px;transform:translate(-50%,-14px);background:#fff;border:1px solid #a8e6bb;border-radius:12px;padding:12px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 28px rgba(24,31,38,.14);opacity:0;pointer-events:none;transition:all .4s;z-index:5;font-size:14px}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.toast i{width:24px;height:24px;border-radius:50%;background:#13AD68;color:#fff;display:grid;place-items:center;font-style:normal;font-size:13px}
-.scrim{inset:96px 0 0 48px;background:rgba(24,31,38,.22);opacity:0;pointer-events:none;transition:opacity .3s;z-index:6}
+.toast{left:50%;top:16px;margin-left:-250px;width:500px;background:#fff;border:1px solid #a8e6bb;border-radius:16px;padding:12px 20px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 28px rgba(24,31,38,.14);opacity:0;pointer-events:none;transition:opacity .4s;z-index:5;font-size:15px;line-height:24px}
+.toast.show{opacity:1}
+.toast i{width:24px;height:24px;border-radius:50%;background:#13AD68;color:#fff;display:grid;place-items:center;flex:none}
+.toast i b{width:16px;height:16px;background:#fff;-webkit-mask:url(assets/jo/tick-16.svg) center/16px no-repeat;mask:url(assets/jo/tick-16.svg) center/16px no-repeat}
+.scrim{inset:0;background:rgba(24,31,38,.22);opacity:0;pointer-events:none;transition:opacity .3s;z-index:6}
 .scrim.show{opacity:1}
-.ai{left:80px;top:156px;width:520px;background:#fff;border-radius:16px;padding:22px 24px;z-index:7;box-shadow:0 0 0 1.5px #8fb8f5,0 0 28px rgba(110,90,230,.28),0 14px 44px rgba(24,31,38,.22);opacity:0;transform:translateY(-10px);pointer-events:none;transition:all .35s cubic-bezier(.2,.8,.2,1)}
+.ai{left:32px;top:60px;width:540px;background:#fff;border-radius:16px;padding:24px 28px;z-index:7;box-shadow:0 0 0 1.5px #8fb8f5,0 0 28px rgba(110,90,230,.28),0 14px 44px rgba(24,31,38,.22);opacity:0;transform:translateY(-10px);pointer-events:none;transition:all .35s cubic-bezier(.2,.8,.2,1)}
 .ai.show{opacity:1;transform:none}
-.ai h3{font-size:18px;font-weight:600;display:flex;align-items:center;gap:10px}
-.ai h3 i{font-style:normal;font-size:11px;font-weight:600;background:#E6F0FD;color:#0256c0;border-radius:99px;padding:1px 10px}
-.ai .sub2{font-size:14px;color:#5F6C7A;margin:6px 0 14px}
-.ai-box{border:1.5px solid #55adff;border-radius:12px;padding:14px 16px;min-height:96px;font-size:15px;line-height:1.5;box-shadow:0 0 0 4px rgba(85,173,255,.12)}
-.caret{display:inline-block;width:1.5px;height:17px;background:#181F26;vertical-align:-3px;margin-left:1px;animation:blink .9s steps(1) infinite}
+.ai h3{font-size:20px;line-height:28px;font-weight:600;display:flex;align-items:center;gap:10px}
+.ai h3 i{font-style:normal;font-size:13px;line-height:20px;font-weight:600;background:#E6F0FD;color:#0256c0;border-radius:8px;padding:0 8px}
+.ai .sub2{font-size:15px;line-height:24px;color:#5F6C7A;margin:6px 0 16px}
+.ai-box{border:1.5px solid #55adff;border-radius:12px;padding:14px 16px;min-height:104px;font-size:15px;line-height:24px;box-shadow:0 0 0 4px rgba(85,173,255,.12)}
+.caret{display:inline-block;width:1.5px;height:18px;background:#181F26;vertical-align:-4px;margin-left:1px;animation:blink .9s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.ai-uses{margin-top:14px;font-size:12px;font-weight:600;color:#5F6C7A;text-transform:uppercase;letter-spacing:.03em}
+.ai-uses{margin-top:16px;font-size:12px;line-height:16px;font-weight:600;color:#5F6C7A;text-transform:uppercase;letter-spacing:.05em}
 .ai-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.ai-chips span{font-size:13px;border:1px solid #E6E9EC;background:#F5F7F9;border-radius:99px;padding:3px 12px}
+.ai-chips span{font-size:13px;line-height:20px;border:1px solid #E6E9EC;background:#F5F7F9;border-radius:8px;padding:3px 12px}
 .ai-foot{display:flex;justify-content:flex-end;margin-top:16px}
-.ai-foot button{height:36px;padding:0 22px;border-radius:99px;background:#0369E9;color:#fff;font-weight:600;font-size:14px}
+.ai-foot button{height:36px;padding:0 22px;border-radius:100px;background:#0369E9;color:#fff;font-weight:600;font-size:15px}
 </style>
 </head>
 <body>
-<div class="stage" id="stage">
-  <div class="abs dots"></div>
-
-  <!-- header -->
-  <div class="abs hdr">
-    <div class="hdr-top">
-      <div class="hdr-title">Programs</div>
-      <div class="search">
-        <span class="si"><span class="ic" style="width:16px;height:16px"><img src="assets/jo/search16.svg" alt="" style="--b:-4.37% -4.38% -4.38% -4.37%"></span></span>
-        <span class="cur"></span>
-        <p>Search for Companies and Relationships</p>
-      </div>
-      <div class="hicons">
-        <span class="hbtn"><span class="ic"><span class="in" style="--i:6.25% 16.67%"><img src="assets/jo/notifications.svg" alt="" style="--b:-3.33% -4.38% -3.33% -4.37%"></span></span></span>
-        <span class="hbtn"><span class="ic"><span class="in" style="--i:4.17% 4.17% 4.03% 4.17%"><img src="assets/jo/sally-filled.svg" alt="" style="--b:-3.5% -3.52% -3.5% -3.51%"></span></span></span>
-        <span class="hbtn"><img class="av" src="assets/jo/avatar.png" alt="" width="24" height="24"></span>
-      </div>
-    </div>
-  </div>
-  <div class="abs back">
-    <span class="ic" style="display:flex;align-items:center;justify-content:center"><span style="position:relative;width:11px;height:10px"><img src="assets/jo/arrow-left.svg" alt="" style="position:absolute;inset:-7% -6.36%;width:calc(100% + 12.7%);height:calc(100% + 14%)"></span></span>
-    <div class="row"><span class="t">Executive outreach, red accounts near renewal</span><span class="lbl" id="chip">Draft</span></div>
-  </div>
-  <button class="abs publish" id="publish">Publish</button>
-
-  <!-- left menu -->
-  <div class="abs lmenu">
+<div class="app">
+  <nav class="lmenu">
     <div class="mi"><span class="ic"><span class="in" style="--i:8.33% 12.5%"><img class="full" src="assets/jo/nav-gainsight.svg" alt=""></span></span></div>
     <div class="mi"><span class="ic"><span class="in" style="--i:16.67%"><img src="assets/jo/nav-search.svg" alt="" style="--b:-4.37% -4.38% -4.38% -4.37%"></span></span></div>
     <div class="mi"><img src="assets/jo/nav-ai.svg" alt="" width="22" height="22"></div>
@@ -141,95 +118,106 @@ img{display:block;max-width:none}
     <div class="mi"><span class="grid4"><i style="left:3px;top:3px;width:7px;height:7px"></i><i style="left:3px;top:15px;width:7px;height:6px"></i><i style="left:13px;top:11px;width:8px;height:10px"></i><i style="left:13px;top:3px;width:8px;height:6px"></i></span></div>
     <div class="mdiv"></div>
     <div class="mi"><span class="ic"><img class="full" src="assets/jo/nav-settings.svg" alt=""></span></div>
-  </div>
+  </nav>
 
-  <!-- AI Builder -->
-  <button class="abs aib" id="aib"><span class="ai16"><img src="assets/jo/ai-primary.svg" alt=""></span>AI Builder</button>
+  <div class="main">
+    <header class="hdr">
+      <div class="hdr-top">
+        <div class="hdr-title">Programs</div>
+        <div class="search">
+          <span class="si"><span class="ic" style="width:16px;height:16px"><img src="assets/jo/search16.svg" alt="" style="--b:-4.37% -4.38% -4.38% -4.37%"></span></span>
+          <p>Search for Companies and Relationships</p>
+        </div>
+        <div class="hicons">
+          <span class="hbtn"><span class="ic"><span class="in" style="--i:6.25% 16.67%"><img src="assets/jo/notifications.svg" alt="" style="--b:-3.33% -4.38% -3.33% -4.37%"></span></span></span>
+          <span class="hbtn"><span class="ic"><span class="in" style="--i:4.17% 4.17% 4.03% 4.17%"><img src="assets/jo/sally-filled.svg" alt="" style="--b:-3.5% -3.52% -3.5% -3.51%"></span></span></span>
+          <span class="hbtn"><img class="av" src="assets/jo/avatar.png" alt="" width="24" height="24"></span>
+        </div>
+      </div>
+      <div class="sub">
+        <div class="back">
+          <span class="ic" style="display:flex;align-items:center;justify-content:center"><span style="position:relative;width:11px;height:10px"><img src="assets/jo/arrow-left.svg" alt="" style="position:absolute;inset:-7% -6.36%;width:calc(100% + 12.7%);height:calc(100% + 14%)"></span></span>
+          <div class="row"><span class="t">Executive outreach, red accounts near renewal</span><span class="lbl" id="chip">Draft</span></div>
+        </div>
+        <button class="publish" id="publish">Publish</button>
+      </div>
+    </header>
 
-  <!-- toolbar -->
-  <div class="abs tb">
-    <span class="t" style="left:16px"><img src="assets/jo/remove.svg" alt=""></span>
-    <span class="t" style="left:48px"><span style="position:absolute;inset:20.83%"><img src="assets/jo/fullscreen.svg" alt="" style="position:absolute;inset:-5%;width:110%;height:110%"></span></span>
-    <span class="t" style="left:80px"><img src="assets/jo/add.svg" alt=""></span>
-    <span class="div"></span>
-    <span class="t" style="left:137px"><img src="assets/jo/undo.svg" alt=""></span>
-    <span class="t" style="left:169px"><img src="assets/jo/redo.svg" alt=""></span>
-  </div>
+    <div class="canvas">
+      <div class="abs dots"></div>
+      <button class="abs aib" id="aib"><span class="ai16"><img src="assets/jo/ai-primary.svg" alt=""></span>AI Builder</button>
 
-  <!-- sidebar -->
-  <img class="abs side-bg" src="assets/jo/sidebar-bg.svg" alt="">
-  <div class="abs stitle" style="left:1222px;top:136px">Actions</div>
-  <img class="abs" src="assets/jo/tile-email-side.svg" alt="" style="left:1227px;top:168px;width:56px;height:56px"><div class="abs slbl" style="left:1255px;top:228px">Email</div>
-  <img class="abs" src="assets/jo/tile-survey.svg" alt="" style="left:1320px;top:168px;width:56px;height:56px"><div class="abs slbl" style="left:1348px;top:228px">Survey</div>
-  <img class="abs" src="assets/jo/tile-cta.svg" alt="" style="left:1227px;top:260px;width:56px;height:56px"><div class="abs slbl" style="left:1255px;top:320px">CTA</div>
-  <img class="abs" src="assets/jo/tile-px-bg.svg" alt="" style="left:1320px;top:260px;width:56px;height:56px"><div class="abs big" style="left:1328px;top:268px;color:#F4A702">PX</div><div class="abs slbl" style="left:1348px;top:320px">Engagement</div>
-  <img class="abs" src="assets/jo/tile-api.svg" alt="" style="left:1227px;top:352px;width:56px;height:56px"><div class="abs slbl" style="left:1255px;top:412px">API</div>
-  <img class="abs" src="assets/jo/tile-bg.svg" alt="" style="left:1320px;top:352px;width:56px;height:56px">
-  <img class="abs" src="assets/jo/slack2.svg" alt="" style="left:1335px;top:367px;width:12.2px;height:12.2px"><img class="abs" src="assets/jo/slack3.svg" alt="" style="left:1348.7px;top:367px;width:12.2px;height:12.2px"><img class="abs" src="assets/jo/slack1.svg" alt="" style="left:1335px;top:380.7px;width:12.2px;height:12.3px"><img class="abs" src="assets/jo/slack4.svg" alt="" style="left:1348.7px;top:380.7px;width:12.2px;height:12.3px">
-  <div class="abs slbl" style="left:1348px;top:412px">Slack</div>
-  <img class="abs" src="assets/jo/tile-bg.svg" alt="" style="left:1227px;top:449px;width:56px;height:56px"><div class="abs big" style="left:1235px;top:457px;color:#F5508B">CC</div><div class="abs slbl" style="left:1255px;top:509px">Community</div>
-  <img class="abs" src="assets/jo/tile-bg.svg" alt="" style="left:1320px;top:449px;width:56px;height:56px"><div class="abs big" style="left:1328px;top:457px;color:#77AB37">CE</div><div class="abs slbl" style="left:1348px;top:509px">Education</div>
-  <div class="abs stitle" style="left:1222px;top:565px">Conditions</div>
-  <img class="abs" src="assets/jo/tile-evaluate.svg" alt="" style="left:1227px;top:597px;width:56px;height:56px"><div class="abs slbl" style="left:1255px;top:657px">Evaluate</div>
-  <img class="abs" src="assets/jo/tile-delay.svg" alt="" style="left:1320px;top:597px;width:56px;height:56px"><div class="abs slbl" style="left:1348px;top:657px">Delay</div>
+      <div class="abs tb">
+        <span class="t" style="left:16px"><img src="assets/jo/remove.svg" alt=""></span>
+        <span class="t" style="left:48px"><span style="position:absolute;inset:20.83%"><img src="assets/jo/fullscreen.svg" alt="" style="position:absolute;inset:-5%;width:110%;height:110%"></span></span>
+        <span class="t" style="left:80px"><img src="assets/jo/add.svg" alt=""></span>
+        <span class="div"></span>
+        <span class="t" style="left:137px"><img src="assets/jo/undo.svg" alt=""></span>
+        <span class="t" style="left:169px"><img src="assets/jo/redo.svg" alt=""></span>
+      </div>
 
-  <!-- flow: connectors behind the nodes -->
-  <img class="abs vline" src="assets/jo/vec19.svg" alt="" style="left:719.5px;top:176px;height:66px">
-  <img class="abs vline" src="assets/jo/vec279.svg" alt="" style="left:719.5px;top:298px;height:132px">
-  <img class="abs vline" src="assets/jo/vec280.svg" alt="" style="left:719.5px;top:487px;height:91px">
-  <img class="abs vline" src="assets/jo/vec281.svg" alt="" style="left:719.5px;top:634px;height:129px">
+      <!-- right panel -->
+      <div class="abs rside">
+        <img class="abs bg" src="assets/jo/sidebar-bg.svg" alt="">
+        <div class="abs stitle" style="left:24px;top:16px">Actions</div>
+        <img class="abs tile" src="assets/jo/tile-email-side.svg" alt="" style="left:29px;top:48px"><div class="abs slbl" style="left:57px;top:108px">Email</div>
+        <img class="abs tile" src="assets/jo/tile-survey.svg" alt="" style="left:122px;top:48px"><div class="abs slbl" style="left:150px;top:108px">Survey</div>
+        <img class="abs tile" src="assets/jo/tile-cta.svg" alt="" style="left:29px;top:140px"><div class="abs slbl" style="left:57px;top:200px">CTA</div>
+        <img class="abs tile" src="assets/jo/tile-px-bg.svg" alt="" style="left:122px;top:140px"><div class="abs big" style="left:130px;top:148px;color:#F4A702">PX</div><div class="abs slbl" style="left:150px;top:200px">Engagement</div>
+        <img class="abs tile" src="assets/jo/tile-api.svg" alt="" style="left:29px;top:232px"><div class="abs slbl" style="left:57px;top:292px">API</div>
+        <img class="abs tile" src="assets/jo/tile-bg.svg" alt="" style="left:122px;top:232px">
+        <img class="abs" src="assets/jo/slack2.svg" alt="" style="left:137px;top:247px;width:12.2px;height:12.2px"><img class="abs" src="assets/jo/slack3.svg" alt="" style="left:150.7px;top:247px;width:12.2px;height:12.2px"><img class="abs" src="assets/jo/slack1.svg" alt="" style="left:137px;top:260.7px;width:12.2px;height:12.3px"><img class="abs" src="assets/jo/slack4.svg" alt="" style="left:150.7px;top:260.7px;width:12.2px;height:12.3px">
+        <div class="abs slbl" style="left:150px;top:292px">Slack</div>
+        <img class="abs tile" src="assets/jo/tile-bg.svg" alt="" style="left:29px;top:329px"><div class="abs big" style="left:37px;top:337px;color:#F5508B">CC</div><div class="abs slbl" style="left:57px;top:389px">Community</div>
+        <img class="abs tile" src="assets/jo/tile-bg.svg" alt="" style="left:122px;top:329px"><div class="abs big" style="left:130px;top:337px;color:#77AB37">CE</div><div class="abs slbl" style="left:150px;top:389px">Education</div>
+        <div class="abs stitle" style="left:24px;top:445px">Conditions</div>
+        <img class="abs tile" src="assets/jo/tile-evaluate.svg" alt="" style="left:29px;top:477px"><div class="abs slbl" style="left:57px;top:537px">Evaluate</div>
+        <img class="abs tile" src="assets/jo/tile-delay.svg" alt="" style="left:122px;top:477px"><div class="abs slbl" style="left:150px;top:537px">Delay</div>
+      </div>
 
-  <!-- audience -->
-  <img class="abs" src="assets/jo/audience-label-bg.svg" alt="" style="left:661px;top:182px;width:120px;height:20px">
-  <div class="abs tlabel" style="left:661px;top:184px;width:120px">Audience</div>
-  <img class="abs" src="assets/jo/tile-audience.svg" alt="" style="left:692px;top:120px;width:56px;height:56px">
+      <!-- flow: connectors behind the nodes, everything positioned from the center line -->
+      <div class="abs flow">
+        <img class="abs vline" src="assets/jo/vec19.svg" alt="" style="left:-0.5px;top:80px;height:66px">
+        <img class="abs vline" src="assets/jo/vec279.svg" alt="" style="left:-0.5px;top:202px;height:132px">
+        <img class="abs vline" src="assets/jo/vec280.svg" alt="" style="left:-0.5px;top:391px;height:91px">
+        <img class="abs vline" src="assets/jo/vec281.svg" alt="" style="left:-0.5px;top:538px;height:129px">
 
-  <!-- email -->
-  <div class="node" style="left:654px;top:242px;width:132px;animation-delay:.15s">
-    <div class="grp"><img src="assets/jo/tile-email.svg" alt="" width="56" height="56"><span class="nl" style="width:100%">Executive outreach (Day 0)</span><span class="so">Show Outcomes</span></div>
-    <span class="sent" id="sent1">Email Sent</span>
-  </div>
-  <!-- wait -->
-  <div class="node" style="left:670px;top:430px;width:100px;gap:6px;animation-delay:.3s">
-    <img src="assets/jo/tile-wait.svg" alt="" width="56" height="56">
-    <span class="tlabel" style="width:100%;white-space:normal">Wait for 3 days</span>
-    <span class="so">Wait for 3 days</span>
-  </div>
-  <!-- CTA -->
-  <div class="node" style="left:646px;top:578px;width:148px;animation-delay:.45s">
-    <div class="grp"><img src="assets/jo/tile-cta.svg" alt="" width="56" height="56"><span class="nl" style="width:100%">Executive follow-up CTA</span><span class="so">Show Outcomes</span></div>
-    <span class="sent" id="sent2">CTA Created</span>
-  </div>
-  <span class="abs ic" style="left:708px;top:761px"><img class="full" src="assets/jo/end-x.svg" alt="" style="inset:3px;width:18px;height:18px"></span>
+        <img class="abs" src="assets/jo/audience-label-bg.svg" alt="" style="left:-59px;top:86px;width:120px;height:20px">
+        <div class="abs tlabel" style="left:-59px;top:86px;width:120px">Audience</div>
+        <img class="abs tile" src="assets/jo/tile-audience.svg" alt="" style="left:-28px;top:24px">
 
-  <div class="abs toast" id="toast"><i>&#10003;</i><span>Published. Executive outreach starts when an account turns red near renewal.</span></div>
-  <div class="abs scrim" id="scrim"></div>
-  <div class="abs ai" id="ai">
-    <h3>Build with AI <i>Beta</i></h3>
-    <p class="sub2">Describe the journey. Gainsight drafts it using your own programs and email templates.</p>
-    <div class="ai-box"><span id="ai-text"></span><span class="caret"></span></div>
-    <div class="ai-uses">Drafts from your</div>
-    <div class="ai-chips"><span>Renewal reminder, 120 / 90 / 60</span><span>Executive sponsor email template</span><span>Onboarding, new customers</span></div>
-    <div class="ai-foot"><button>Draft journey</button></div>
+        <div class="node" style="left:-66px;top:146px;width:132px;animation-delay:.15s">
+          <div class="grp"><img src="assets/jo/tile-email.svg" alt="" width="56" height="56"><span class="nl" style="width:100%">Executive outreach (Day 0)</span><span class="so">Show Outcomes</span></div>
+          <span class="sent" id="sent1">Email Sent</span>
+        </div>
+        <div class="node" style="left:-50px;top:334px;width:100px;gap:6px;animation-delay:.3s">
+          <img src="assets/jo/tile-wait.svg" alt="" width="56" height="56">
+          <span class="tlabel" style="width:100%;white-space:normal">Wait for 3 days</span>
+          <span class="so">Wait for 3 days</span>
+        </div>
+        <div class="node" style="left:-74px;top:482px;width:148px;animation-delay:.45s">
+          <div class="grp"><img src="assets/jo/tile-cta.svg" alt="" width="56" height="56"><span class="nl" style="width:100%">Executive follow-up CTA</span><span class="so">Show Outcomes</span></div>
+          <span class="sent" id="sent2">CTA Created</span>
+        </div>
+        <span class="abs ic" style="left:-12px;top:665px"><img class="full" src="assets/jo/end-x.svg" alt="" style="inset:3px;width:18px;height:18px"></span>
+      </div>
+
+      <div class="abs toast" id="toast"><i><b></b></i><span>Published. Executive outreach starts when an account turns red near renewal.</span></div>
+      <div class="abs scrim" id="scrim"></div>
+      <div class="abs ai" id="ai">
+        <h3>Build with AI <i>Beta</i></h3>
+        <p class="sub2">Describe the journey. Gainsight drafts it using your own programs and email templates.</p>
+        <div class="ai-box"><span id="ai-text"></span><span class="caret"></span></div>
+        <div class="ai-uses">Drafts from your</div>
+        <div class="ai-chips"><span>Renewal reminder, 120 / 90 / 60</span><span>Executive sponsor email template</span><span>Onboarding, new customers</span></div>
+        <div class="ai-foot"><button>Draft journey</button></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-// The terminal page drives this screen: 'publish', then 'ai'. The 1440 x 900 design is scaled to fit and centered.
-var stage = document.getElementById('stage');
-// Fill the window: scale to the width, then stretch the height-dependent parts (left menu, canvas texture, sidebar card) to the real height.
-// Only a very wide, short window falls back to scaling by height with side margins.
-function fit() {
-  var s = innerWidth / 1440, h = innerHeight / s, x = 0;
-  if (h < 780) { s = innerHeight / 780; h = 780; x = (innerWidth - 1440 * s) / 2; }
-  stage.style.height = h + 'px';
-  stage.style.transform = 'translate(' + x + 'px,0) scale(' + s + ')';
-  document.querySelector('.lmenu').style.height = h + 'px';
-  document.querySelector('.dots').style.height = (h - 96) + 'px';
-  document.querySelector('.side-bg').style.height = Math.max(610, h - 120) + 'px';
-}
-fit(); addEventListener('resize', fit);
-
+// The terminal page drives this screen: 'publish', then 'ai'
 var TYPE_MS = 30; // same per-character delay as the terminal prompts
 var AI_TEXT = "When an account turns red within 120 days of renewal, email the executive sponsor, wait three days, then create a follow-up CTA for the CSM.";
 function publish() {
