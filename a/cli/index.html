@@ -16,7 +16,17 @@ body {
   background: #060412;
 }
 
-#bg-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+/* Same sky as the deck: gradient, soft glows, twinkling stars, sparkles and shooting stars */
+#sky { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+  background: radial-gradient(60% 40% at 8% 45%, rgba(125,52,190,0.35), transparent 70%), radial-gradient(50% 35% at 95% 30%, rgba(220,75,140,0.3), transparent 70%), radial-gradient(90% 40% at 50% 110%, rgba(190,115,95,0.55), transparent 70%), linear-gradient(180deg, #090F23 0%, #1E2744 55%, #343553 100%); }
+#sky > div { position: absolute; }
+#sky .sp { transform: translate(-50%, -50%); animation: sparklePulse var(--d) ease-in-out var(--dl) infinite; }
+#sky .sp > i { position: absolute; display: block; }
+@keyframes starPulse1 { 0%,100% { opacity: 0.18; } 50% { opacity: 0.5; } }
+@keyframes starPulse2 { 0%,100% { opacity: 0.28; } 50% { opacity: 0.68; } }
+@keyframes starPulse3 { 0%,100% { opacity: 0.38; } 50% { opacity: 0.88; } }
+@keyframes sparklePulse { 0%,100% { opacity: 0.18; transform: translate(-50%,-50%) scale(0.78); } 50% { opacity: 0.72; transform: translate(-50%,-50%) scale(1.05); } }
+@keyframes shootingStarFly { 0% { transform: rotate(var(--ss-angle)) translate(0,0); opacity: 0; } 22% { opacity: 0.85; } 68% { opacity: 0.7; } 86% { opacity: 0.3; } 100% { transform: rotate(var(--ss-angle)) translate(var(--ss-dist),0); opacity: 0; } }
 
 /* ── Window ── */
 .window {
@@ -46,7 +56,7 @@ body {
 .dot-g { background: #28c840; border: 0.5px solid #1e9930; }
 .titlebar-label {
   position: absolute; left: 50%; transform: translateX(-50%);
-  color: #888; font-size: 13px; display: flex; align-items: center; gap: 6px;
+  color: #b0b0b8; font-size: 14px; display: flex; align-items: center; gap: 6px;
 }
 
 /* ── Tab bar ── */
@@ -55,15 +65,15 @@ body {
   padding: 0 12px; gap: 2px; border-bottom: 1px solid #1a1a1a; flex-shrink: 0;
 }
 .tab {
-  padding: 6px 16px 5px; font-size: 13px; color: #555; cursor: pointer;
+  padding: 6px 16px 5px; font-size: 14px; color: #9a9aa4; cursor: pointer;
   border-radius: 7px 7px 0 0; display: flex; align-items: center; gap: 8px;
   margin-top: 5px; border: 1px solid transparent; border-bottom: none;
   transition: background 0.12s, color 0.12s;
 }
 .tab.active { background: #1c1c1c; color: #ddd; border-color: #3c3c3c; border-bottom-color: #1c1c1c; }
-.tab:not(.active):hover { background: rgba(255,255,255,0.05); color: #888; }
-.tab-x { font-size: 13px; opacity: 0.35; }
-.tab-new { padding: 5px 10px; font-size: 15px; color: #555; cursor: pointer; align-self: center; border-radius: 4px; line-height: 1; }
+.tab:not(.active):hover { background: rgba(255,255,255,0.05); color: #b0b0b8; }
+.tab-x { font-size: 14px; opacity: 0.35; }
+.tab-new { padding: 5px 10px; font-size: 15px; color: #9a9aa4; cursor: pointer; align-self: center; border-radius: 4px; line-height: 1; }
 .tab-new:hover { color: #ddd; background: rgba(255,255,255,0.06); }
 
 /* ── Body ── */
@@ -80,7 +90,7 @@ body {
 .statusbar {
   background: #252525; padding: 6px 18px;
   display: flex; align-items: center; justify-content: space-between;
-  border-top: 1px solid #1a1a1a; font-size: 13px; color: #555; flex-shrink: 0;
+  border-top: 1px solid #1a1a1a; font-size: 14px; color: #9a9aa4; flex-shrink: 0;
 }
 .status-l, .status-r { display: flex; align-items: center; gap: 16px; }
 .live-dot {
@@ -92,21 +102,21 @@ body {
 .badge-model {
   background: rgba(224,90,48,0.15); color: #e05a30;
   border: 1px solid rgba(224,90,48,0.3);
-  padding: 1px 8px; border-radius: 3px; font-size: 13px; font-weight: 600;
+  padding: 1px 8px; border-radius: 3px; font-size: 14px; font-weight: 600;
 }
 .badge-tokens {
   background: rgba(80,250,123,0.08); color: #50fa7b;
   border: 1px solid rgba(80,250,123,0.18);
-  padding: 1px 8px; border-radius: 3px; font-size: 13px;
+  padding: 1px 8px; border-radius: 3px; font-size: 14px;
 }
 
 /* ── Terminal colors ── */
 .c-action { color: #e05a30; }
 .c-prompt { color: #50fa7b; }
-.c-dim    { color: #666; }
-.c-out    { color: #808095; }
+.c-dim    { color: #a2a2ac; }
+.c-out    { color: #a8a8bd; }
 .c-allow  { color: #4ec94e; }
-.c-timing { color: #484858; }
+.c-timing { color: #9a9aae; }
 .c-ok     { color: #50fa7b; }
 .c-bold   { color: #ececec; font-weight: 600; }
 .c-yellow { color: #f1c55a; }
@@ -123,16 +133,16 @@ body {
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* ── Startup screen ── */
-.s-shell { color: #555; font-size: 15px; line-height: 1.6; }
+.s-shell { color: #9a9aa4; font-size: 15px; line-height: 1.6; }
 .s-header { display: flex; align-items: flex-start; gap: 18px; margin: 8px 0 6px; }
 .s-title { font-weight: 700; font-size: 20px; color: #e8e8e8; }
-.s-ver   { font-weight: 400; font-size: 20px; color: #666; }
-.s-sub   { font-size: 15px; color: #666; line-height: 1.7; }
-.s-model { font-size: 15px; color: #777; margin: 4px 0; }
+.s-ver   { font-weight: 400; font-size: 20px; color: #a2a2ac; }
+.s-sub   { font-size: 15px; color: #a2a2ac; line-height: 1.7; }
+.s-model { font-size: 15px; color: #a8a8b0; margin: 4px 0; }
 .s-div   { height: 1px; background: #2e2e2e; margin: 10px 0; }
 .s-prompt-row { display: flex; align-items: flex-start; padding: 6px 0; }
 .s-prompt-row .cur { margin-top: 6.5px; }
-.s-shorts { font-size: 15px; color: #555; padding: 4px 0; }
+.s-shorts { font-size: 15px; color: #9a9aa4; padding: 4px 0; }
 
 /* ── Bash block ── */
 .bash-wrap { margin: 2px 0; }
@@ -141,23 +151,23 @@ body {
 .bash-label  { color: #e05a30; font-weight: 600; }
 .bash-cmd    { color: #b0b0c0; }
 .bash-out-block { margin: 2px 0 2px 22px; }
-.bash-out-line  { display: flex; align-items: baseline; color: #808095; font-size: 15px; line-height: 1.7; }
-.bash-hook  { color: #484858; margin-right: 5px; flex-shrink: 0; }
-.bash-expand { color: #383848; font-size: 14px; }
+.bash-out-line  { display: flex; align-items: baseline; color: #a8a8bd; font-size: 15px; line-height: 1.7; }
+.bash-hook  { color: #9a9aae; margin-right: 5px; flex-shrink: 0; }
+.bash-expand { color: #8a8a9e; font-size: 14px; }
 .bash-allow  { color: #4ec94e; }
 
 /* ── Program box ── */
 .prog-box { margin: 10px 0; border: 1px solid #2e2e3e; border-radius: 8px; overflow: hidden; background: #212130; }
 .prog-box-row { padding: 9px 18px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #252535; font-size: 15px; }
 .prog-box-row:last-child { border-bottom: none; }
-.prog-email-num { background: rgba(224,90,48,0.15); color: #e05a30; border: 1px solid rgba(224,90,48,0.3); padding: 1px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
-.prog-wait-num  { background: rgba(80,80,100,0.2); color: #808095; border: 1px solid rgba(80,80,100,0.3); padding: 1px 10px; border-radius: 4px; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+.prog-email-num { background: rgba(224,90,48,0.15); color: #e05a30; border: 1px solid rgba(224,90,48,0.3); padding: 1px 10px; border-radius: 4px; font-size: 14px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+.prog-wait-num  { background: rgba(80,80,100,0.2); color: #a8a8bd; border: 1px solid rgba(80,80,100,0.3); padding: 1px 10px; border-radius: 4px; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
 .prog-email-title { color: #e8e8f0; }
-.prog-wait-title  { color: #555565; font-size: 15px; }
+.prog-wait-title  { color: #9a9ab0; font-size: 15px; }
 
 /* ── Meta / spacing ── */
 .meta-row { font-size: 15px; display: flex; margin: 1px 0; }
-.meta-key { color: #505060; min-width: 130px; }
+.meta-key { color: #9a9aae; min-width: 130px; }
 .meta-val { color: #b0b0c0; }
 .sp2 { height: 8px; }
 .sp1 { height: 4px; }
@@ -177,18 +187,18 @@ body {
 
 /* ── Admin scene: questions + rule box ── */
 .q-box { margin: 10px 0; border: 1px solid #2e2e3e; border-radius: 8px; background: #212130; padding: 12px 18px; }
-.q-tabs { color: #666; font-size: 15px; margin-bottom: 6px; }
+.q-tabs { color: #a2a2ac; font-size: 15px; margin-bottom: 6px; }
 .q-tabs .done { color: #50fa7b; }
 .q-text { color: #ececec; font-weight: 600; margin: 10px 0 2px; font-size: 15px; }
-.q-opt { color: #808095; font-size: 15px; padding-left: 4px; line-height: 1.7; transition: color 0.2s; }
+.q-opt { color: #a8a8bd; font-size: 15px; padding-left: 4px; line-height: 1.7; transition: color 0.2s; }
 .q-opt::before { content: '○\00a0\00a0'; }
 .q-opt.sel { color: #50fa7b; }
 .q-opt.sel::before { content: '●\00a0\00a0'; }
-.q-opt small { color: #505060; margin-left: 6px; }
+.q-opt small { color: #9a9aae; margin-left: 6px; }
 .rule-box { margin: 10px 0; border: 1px solid #2e2e3e; border-radius: 8px; overflow: hidden; background: #212130; }
 .rule-row { display: flex; gap: 14px; padding: 8px 18px; border-bottom: 1px solid #252535; font-size: 15px; }
 .rule-row:last-child { border-bottom: none; }
-.rule-key { color: #505060; min-width: 210px; flex-shrink: 0; }
+.rule-key { color: #9a9aae; min-width: 210px; flex-shrink: 0; }
 .rule-val { color: #b0b0c0; }
 
 
@@ -196,13 +206,13 @@ body {
 .opt-box { margin: 10px 0; border: 1px solid #2e2e3e; border-radius: 8px; background: #212130; padding: 12px 18px; }
 .opt-row { display: flex; gap: 14px; padding: 5px 0; font-size: 15px; line-height: 1.5; color: #b0b0c0; }
 .opt-num { color: #e05a30; font-weight: 600; flex-shrink: 0; }
-.opt-row small { display: block; color: #606075; font-size: 14px; }
+.opt-row small { display: block; color: #a2a2b8; font-size: 14px; }
 .perm-box { margin: 10px 0; border: 1px solid #e05a30; border-radius: 8px; background: #211d24; padding: 14px 18px; }
 .perm-title { color: #e05a30; font-weight: 600; font-size: 15px; }
 .perm-cmd { margin: 8px 0 4px; padding: 8px 12px; border-radius: 6px; background: #17171f; color: #b0b0c0; font-size: 15px; word-break: break-word; }
-.perm-note { color: #808095; font-size: 15px; margin: 8px 0 10px; }
+.perm-note { color: #a8a8bd; font-size: 15px; margin: 8px 0 10px; }
 .perm-q { color: #ececec; font-size: 15px; margin-bottom: 4px; }
-.perm-opt { font-size: 15px; color: #808095; padding: 1px 0; transition: color .2s; }
+.perm-opt { font-size: 15px; color: #a8a8bd; padding: 1px 0; transition: color .2s; }
 .perm-opt.now { color: #50fa7b; }
 .perm-opt.now::before { content: '❯ '; }
 .perm-opt:not(.now)::before { content: '\00a0\00a0'; }
@@ -223,7 +233,7 @@ body {
 .figma-kbd-hint {
   position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
   background: rgba(24,31,38,0.72); color: rgba(220,220,220,0.9);
-  font-family: 'Noto Sans', sans-serif; font-size: 13px; letter-spacing: 0.01em;
+  font-family: 'Noto Sans', sans-serif; font-size: 14px; letter-spacing: 0.01em;
   padding: 7px 20px; border-radius: 24px; white-space: nowrap; pointer-events: none;
   border: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -234,7 +244,7 @@ body {
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
+<div id="sky"></div>
 
 <div class="window">
   <div class="titlebar">
@@ -278,78 +288,39 @@ body {
 
 <script>
 // ─────────────────────────────────────────────
-// Mojave Night Dunes
+// Sky: same star field as the deck shell (shell/src/components/Stars.tsx)
 // ─────────────────────────────────────────────
-const bgCanvas = document.getElementById('bg-canvas');
-const bgCtx = bgCanvas.getContext('2d');
-
-function drawBg() {
-  const w = window.innerWidth, h = window.innerHeight;
-  bgCanvas.width = w; bgCanvas.height = h;
-
-  const sky = bgCtx.createLinearGradient(0, 0, 0, h);
-  sky.addColorStop(0.00, '#040210');
-  sky.addColorStop(0.15, '#08061a');
-  sky.addColorStop(0.32, '#110d2c');
-  sky.addColorStop(0.48, '#1e1340');
-  sky.addColorStop(0.56, '#2d1a52');
-  sky.addColorStop(0.63, '#38205e');
-  sky.addColorStop(0.70, '#221540');
-  sky.addColorStop(0.80, '#120d28');
-  sky.addColorStop(1.00, '#060412');
-  bgCtx.fillStyle = sky; bgCtx.fillRect(0, 0, w, h);
-
-  // Horizon glow
-  const hg = bgCtx.createRadialGradient(w*.5, h*.63, 0, w*.5, h*.63, w*.44);
-  hg.addColorStop(0, 'rgba(110,55,160,0.44)');
-  hg.addColorStop(.4, 'rgba(70,30,110,0.18)');
-  hg.addColorStop(1, 'rgba(0,0,0,0)');
-  bgCtx.fillStyle = hg; bgCtx.fillRect(0, 0, w, h);
-
-  // Moon glow
-  const mg = bgCtx.createRadialGradient(w*.78, h*.12, 0, w*.78, h*.12, w*.17);
-  mg.addColorStop(0, 'rgba(200,180,255,0.06)');
-  mg.addColorStop(1, 'rgba(0,0,0,0)');
-  bgCtx.fillStyle = mg; bgCtx.fillRect(0, 0, w, h);
-
-  // Stars
-  for (let i = 0; i < 300; i++) {
-    const x = Math.random()*w, y = Math.random()*h*.67;
-    const r = Math.random()*1.3+0.2, o = Math.random()*.55+0.18;
-    bgCtx.beginPath(); bgCtx.arc(x, y, r, 0, Math.PI*2);
-    bgCtx.fillStyle = `rgba(230,220,255,${o})`; bgCtx.fill();
+(function () {
+  var sky = document.getElementById('sky');
+  var DOTS = [[8,4,1.5,2,2.6,0],[15,2,1,1,2.88,300],[22,7,2,3,3.16,600],[28,4,1,1,3.44,900],[35,9,1.5,2,3.72,150],[42,3,1,1,4,450],[48,6,2,3,4.28,750],[55,2,1,1,4.56,1050],[62,8,1.5,2,2.6,200],[68,4,1,2,2.88,500],[75,6,2,3,3.16,800],[82,3,1,1,3.44,1100],[88,7,1.5,2,3.72,350],[94,5,1,1,4,650],[10,13,1,2,4.28,100],[19,11,1.5,3,4.56,400],[26,16,1,1,2.6,700],[33,12,2,3,2.88,1000],[40,15,1,1,3.16,250],[47,10,1.5,2,3.44,550],[53,14,1,2,3.72,850],[60,11,2,3,4,150],[67,15,1,1,4.28,450],[73,12,1.5,2,4.56,750],[80,14,1,1,2.6,1050],[87,11,2,3,2.88,350],[92,16,1,2,3.16,650],[5,22,1.5,2,3.44,200],[14,28,1,1,3.72,500],[23,25,2,3,4,800],[31,22,1,1,4.28,1100],[44,27,1.5,2,4.56,300],[51,23,1,2,2.6,600],[58,26,2,3,2.88,900],[65,22,1,1,3.16,100],[72,27,1.5,2,3.44,400],[79,24,1,1,3.72,700],[86,22,2,3,4,1000],[93,26,1,2,4.28,250],[7,35,1,1,4.56,550],[17,32,1.5,2,2.6,850],[27,37,1,1,2.88,1150],[38,33,2,3,3.16,450],[49,38,1,1,3.44,750],[59,34,1.5,2,3.72,150],[70,38,1,1,4,950],[80,35,2,3,4.28,350],[90,33,1,1,4.56,650],[12,19,1.5,3,2.6,200],[37,14,1.5,2,2.88,800],[50,9,1,1,3.16,350],[63,19,1.5,3,3.44,500],[85,17,1.5,2,3.72,1200]];
+  var SPARKLES = [[6,17,24,4.5,0],[31,10,19.2,4.5,900],[52,5,28.8,4.5,1800],[67,13,21.6,4.5,450],[88,9,24,4.5,1350],[43,21,16.8,4.5,2200],[78,18,26.4,4.5,700]];
+  function el(css, cls) { var d = document.createElement(cls === 'i' ? 'i' : 'div'); d.style.cssText = css; if (cls && cls !== 'i') d.className = cls; return d; }
+  DOTS.forEach(function (d) {
+    sky.appendChild(el('left:' + d[0] + '%;top:' + d[1] + '%;width:' + d[2] + 'px;height:' + d[2] + 'px;border-radius:50%;background:#fff;animation:starPulse' + d[3] + ' ' + d[4] + 's ease-in-out ' + d[5] + 'ms infinite'));
+  });
+  var lineCss = 'linear-gradient(90deg,transparent,rgba(255,255,255,0.42) 35%,rgba(255,255,255,0.42) 65%,transparent)';
+  SPARKLES.forEach(function (p) {
+    var k = p[2] / 24;
+    var sp = el('left:' + p[0] + '%;top:' + p[1] + '%;width:' + p[2] + 'px;height:' + p[2] + 'px;--d:' + p[3] + 's;--dl:' + p[4] + 'ms', 'sp');
+    sp.appendChild(el('inset:0;border-radius:50%;background:radial-gradient(circle,rgba(200,218,255,0.28) 0%,transparent 62%);filter:blur(' + 5 * k + 'px)', 'i'));
+    sp.appendChild(el('inset:26%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.62) 0%,transparent 68%);filter:blur(' + 2.2 * k + 'px)', 'i'));
+    sp.appendChild(el('top:50%;left:4%;right:4%;height:' + 1.4 * k + 'px;transform:translateY(-50%);background:' + lineCss + ';filter:blur(' + 1.4 * k + 'px)', 'i'));
+    sp.appendChild(el('left:50%;top:4%;bottom:4%;width:' + 1.4 * k + 'px;transform:translateX(-50%);background:' + lineCss.replace('90deg', '180deg') + ';filter:blur(' + 1.4 * k + 'px)', 'i'));
+    sp.appendChild(el('top:50%;left:50%;width:' + 2.5 * k + 'px;height:' + 2.5 * k + 'px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 0 ' + 3.5 * k + 'px rgba(255,255,255,0.95)', 'i'));
+    sky.appendChild(sp);
+  });
+  function shoot() {
+    var dur = 2000 + 1000 * Math.random(), len = 120 + 100 * Math.random();
+    var s = el('left:' + (5 + 58 * Math.random()) + '%;top:' + (2 + 28 * Math.random()) + '%;width:' + len + 'px;height:1.5px;border-radius:1px;background:linear-gradient(to right,transparent 0%,transparent 35%,rgba(200,220,255,0.18) 68%,rgba(255,255,255,0.85) 100%);box-shadow:0 0 3px 0.5px rgba(200,220,255,0.25);--ss-angle:' + (38 + 18 * Math.random()) + 'deg;--ss-dist:' + (260 + 180 * Math.random()) + 'px;animation:shootingStarFly ' + dur + 'ms cubic-bezier(0.2,0,0.6,1) 0s 1 normal forwards');
+    sky.appendChild(s);
+    setTimeout(function () { s.remove(); }, dur + 300);
   }
-
-  // Far dune
-  bgCtx.beginPath(); bgCtx.moveTo(0, h);
-  bgCtx.lineTo(0, h*.74);
-  bgCtx.bezierCurveTo(w*.08,h*.60, w*.18,h*.62, w*.30,h*.66);
-  bgCtx.bezierCurveTo(w*.42,h*.70, w*.50,h*.73, w*.58,h*.68);
-  bgCtx.bezierCurveTo(w*.68,h*.62, w*.78,h*.56, w*.88,h*.64);
-  bgCtx.bezierCurveTo(w*.94,h*.68, w*.97,h*.70, w, h*.72);
-  bgCtx.lineTo(w, h); bgCtx.closePath();
-  bgCtx.fillStyle = '#0c0820'; bgCtx.fill();
-
-  // Mid dune
-  bgCtx.beginPath(); bgCtx.moveTo(0, h);
-  bgCtx.lineTo(0, h*.84);
-  bgCtx.bezierCurveTo(w*.10,h*.76, w*.22,h*.79, w*.38,h*.82);
-  bgCtx.bezierCurveTo(w*.50,h*.84, w*.58,h*.78, w*.68,h*.74);
-  bgCtx.bezierCurveTo(w*.78,h*.70, w*.88,h*.76, w, h*.80);
-  bgCtx.lineTo(w, h); bgCtx.closePath();
-  bgCtx.fillStyle = '#090618'; bgCtx.fill();
-
-  // Front dune
-  bgCtx.beginPath(); bgCtx.moveTo(0, h);
-  bgCtx.lineTo(0, h*.92);
-  bgCtx.bezierCurveTo(w*.12,h*.86, w*.28,h*.88, w*.44,h*.90);
-  bgCtx.bezierCurveTo(w*.58,h*.92, w*.68,h*.87, w*.80,h*.83);
-  bgCtx.bezierCurveTo(w*.90,h*.80, w*.96,h*.86, w, h*.88);
-  bgCtx.lineTo(w, h); bgCtx.closePath();
-  bgCtx.fillStyle = '#060412'; bgCtx.fill();
-}
-drawBg();
-window.addEventListener('resize', drawBg);
+  (function loop() {
+    setTimeout(function () { shoot(); if (Math.random() < 0.28) setTimeout(shoot, 700 + 900 * Math.random()); loop(); }, 5500 + 8000 * Math.random());
+  })();
+  // First one soon after load so the sky is visibly alive
+  setTimeout(shoot, 1500);
+})();
 
 // ─────────────────────────────────────────────
 // Claude pixel-art avatar
@@ -492,7 +463,7 @@ function bashBlock(cmd, outLines, extraNote, showAllow) {
     if (extraNote) {
       d += 70; setTimeout(() => {
         const row = el('div','bash-out-line');
-        row.innerHTML = `<span class="bash-hook">&nbsp;&nbsp;</span><span class="bash-expand">… ${escHtml(extraNote)}&nbsp;<span style="color:#303040">(ctrl+o to expand)</span></span>`;
+        row.innerHTML = `<span class="bash-hook">&nbsp;&nbsp;</span><span class="bash-expand">… ${escHtml(extraNote)}&nbsp;<span style="color:#8a8a9e">(ctrl+o to expand)</span></span>`;
         outWrap.appendChild(row); scroll();
       }, d);
     }
@@ -574,7 +545,7 @@ function showStartup() {
     <div class="sp2"></div>
     <div class="s-div"></div>
     <div class="sp2"></div>
-    <div class="s-prompt-row"><span class="c-prompt">❯</span>&nbsp;<span class="cur" id="idle-cur"></span><span style="color:#404050;margin-left:3px">Try "how do I log an error?"</span></div>
+    <div class="s-prompt-row"><span class="c-prompt">❯</span>&nbsp;<span class="cur" id="idle-cur"></span><span style="color:#8a8a9e;margin-left:3px">Try "how do I log an error?"</span></div>
     <div class="s-div"></div>
     <div class="s-shorts">? for shortcuts</div>`;
 }
@@ -764,10 +735,10 @@ function startAdmin1() {
   demoState = 'admin-run';
   dropFooter(3); // divider, shortcuts, and the startup prompt row (a flex row, so a typed hanging indent and the cursor would split apart)
   typePrompt(ADMIN_PROMPT1);
-  tokensTo(3600, 700);
+  tokensTo(1800, 700);
   wait(450);
   action("Reading your Gainsight instance. I won't change anything.");
-  tokensTo(7000, 800);
+  tokensTo(3400, 800);
   sp1();
   wait(350);
   bashBlock("gainsight scorecards get 'Enterprise Health'", [
@@ -776,10 +747,10 @@ function startAdmin1() {
     "Experience Health   30%   CSAT, NPS, Support Tickets",
     "Bands              Red below 40, Yellow 40 to 69, Green 70+",
   ], "+8 lines", true);
-  tokensTo(26000, 1200);
+  tokensTo(12800, 1200);
   wait(300);
   action("Finding the rules that update the score.");
-  tokensTo(30500, 800);
+  tokensTo(15000, 800);
   wait(400);
   bashBlock("gainsight rules list --writes Scorecard.EnterpriseHealth", [
     "Nightly health refresh        Active   last ran today 02:00",
@@ -787,17 +758,17 @@ function startAdmin1() {
     "Staircase sentiment sync      Active   last ran yesterday 23:15",
     "Usage drop alert              Paused   last ran Sep 18",
   ], null, true);
-  tokensTo(48000, 1200);
+  tokensTo(23500, 1200);
   wait(300);
   action("Checking the Journey Orchestrator programs.");
-  tokensTo(68000, 900);
+  tokensTo(33000, 900);
   wait(400);
   bashBlock("gainsight programs list", [
     "Onboarding, new customers          Active   ~50 participants",
     "Renewal reminder, 120 / 90 / 60    Active   214 participants",
     "Adoption nudge                     Draft    not published",
   ], null, true);
-  tokensTo(81400, 280);
+  tokensTo(39800, 280);
   sp();
   wait(250);
   cliLine('<span class="c-dim">Here is how it is set up today:</span>');
@@ -826,12 +797,12 @@ function startAdmin2() {
   demoState = 'admin-run';
   dropFooter(2);
   typePrompt(ADMIN_PROMPT2);
-  tokensTo(89000, 900);
+  tokensTo(43500, 900);
   wait(400);
   action("Understood. I will create it as a draft and leave it unpublished.");
-  tokensTo(104000, 800);
+  tokensTo(51000, 800);
   sp1();
-  tokensTo(118600, 450);
+  tokensTo(58000, 450);
   wait(350);
   enq(done => {
     const b = el('div', 'perm-box fi'); b.id = 'perm-box';
@@ -853,17 +824,17 @@ function startAdmin3() {
   dropFooter(2);
   enq(done => { const o = document.querySelector('#perm-box .perm-opt.now'); if (o) o.classList.add('picked'); setTimeout(done, 500); });
   sp1();
-  tokensTo(124000, 900);
+  tokensTo(60500, 900);
   action("Creating the draft.");
   wait(400);
   bashBlock(`gainsight programs create --name "${PROGRAM_NAME}" --draft`, [
     "Program ID     p_9c41e7ab",
     "Status         Draft (not published)",
   ], "+9 lines", true);
-  tokensTo(138000, 1100);
+  tokensTo(67500, 1100);
   wait(300);
   action("Adding the audience, the email, and a follow-up CTA for the account owner.");
-  tokensTo(150000, 800);
+  tokensTo(73500, 800);
   wait(450);
   bashBlock("gainsight programs add-steps p_9c41e7ab", [
     "Audience   Health is Red, renewal within 120 days",
@@ -871,7 +842,7 @@ function startAdmin3() {
     "Wait       3 days",
     "CTA        Executive follow-up, owner: CSM",
   ], "+14 lines", true);
-  tokensTo(157300, 230);
+  tokensTo(77000, 230);
   sp();
   wait(200);
   cliLine('<span class="c-dim">Here is the program:</span>');
@@ -932,7 +903,7 @@ function handleLiveInput(cmd) {
     action(`Processing: ${cmd}`);
     wait(700);
     enq(done=>{
-      addHTML(`<div style="margin:4px 0 0 22px;font-size:15px;color:#808095;line-height:1.8">In a live session this would execute against your Gainsight environment.</div>`,'fi');
+      addHTML(`<div style="margin:4px 0 0 22px;font-size:15px;color:#a8a8bd;line-height:1.8">In a live session this would execute against your Gainsight environment.</div>`,'fi');
       done();
     });
   }
